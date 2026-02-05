@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼豆图生成器</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-puzzle-piece"></i> 拼豆图生成器</h1>
+            <p>上传图片，一键生成像素拼豆图</p>
+        </header>
+
+        <main>
+            <div class="controls-section">
+                <div class="upload-box" id="dropZone">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>点击或拖拽上传图片</p>
+                        <span class="file-name" id="fileName"></span>
+                    </div>
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                </div>
+
+                <div class="settings-box">
+                    <div class="setting-group">
+                        <label for="widthInput">
+                            <span id="sizeLabel">横向颗数 (宽度)</span>
+                            <span id="sizeValue">50</span>
+                        </label>
+                        <div class="range-wrapper">
+                            <input type="range" id="widthRange" min="10" max="150" value="50">
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="beadSizeRange">
+                            <span id="beadSizeLabel">单颗豆子大小 (px)</span>
+                            <span id="beadSizeValue">15</span>
+                        </label>
+                        <div class="range-wrapper">
+                            <input type="range" id="beadSizeRange" min="5" max="40" value="15">
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label>网格设置</label>
+                        <div class="checkbox-wrapper" style="margin-bottom: 10px;">
+                            <input type="checkbox" id="showGrid" checked>
+                            <label for="showGrid">显示网格线</label>
+                        </div>
+                        <div class="range-wrapper">
+                            <label for="gridInterval" style="font-size: 0.9rem; color: #666; margin-bottom: 5px;">粗线间隔 (每N格)</label>
+                            <input type="range" id="gridInterval" min="0" max="20" value="10" step="1">
+                            <div style="text-align: right; font-size: 0.8rem; color: #888;" id="gridIntervalVal">10</div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="generateBtn" class="btn btn-primary" disabled>
+                            <i class="fas fa-magic"></i> 生成
+                        </button>
+                        <button id="saveBtn" class="btn btn-success" disabled>
+                            <i class="fas fa-download"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-container" id="previewContainer">
+                    <div class="placeholder-text">预览区域</div>
+                    <canvas id="resultCanvas"></canvas>
+                    <div id="pixelTooltip" class="pixel-tooltip"></div>
+                </div>
+                <div id="beadStats" class="bead-stats" style="display: none;">
+                    <h3><i class="fas fa-list-ol"></i> 用量统计</h3>
+                    <div id="beadList" class="bead-list"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2026 拼豆图生成器</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
